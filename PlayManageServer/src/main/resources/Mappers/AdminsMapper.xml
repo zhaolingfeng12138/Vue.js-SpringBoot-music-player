@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leth.playmanageserver.Daos.AdminsDao">
+
+    <insert id="insertAdmins" parameterType="com.leth.playmanageserver.Pojos.Admins" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into Admins(account, password) values (#{account}, #{password})
+    </insert>
+
+    <delete id="deleteAdmins">
+        delete from Admins where id=#{id}
+    </delete>
+
+    <update id="updateAdmins" parameterType="com.leth.playmanageserver.Pojos.Admins" keyProperty="id" useGeneratedKeys="true">
+        update Admins
+        <set>
+            <if test="account != null">account = #{account},</if>
+            <if test="password != null">password = #{password}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="listAdminsAll" resultType="com.leth.playmanageserver.Pojos.Admins">
+        select * from Admins
+    </select>
+
+    <select id="loginAdmins" resultType="com.leth.playmanageserver.Pojos.Admins">
+        select * from Admins where account=#{account} and password=#{password}
+    </select>
+
+    <select id="searchAdmins" resultType="com.leth.playmanageserver.Pojos.Admins">
+        select * from Admins where account like '%${account}%'
+    </select>
+
+    <select id="searchAdminsOne" resultType="com.leth.playmanageserver.Pojos.Admins">
+        select * from Admins where id=#{id}
+    </select>
+
+</mapper>

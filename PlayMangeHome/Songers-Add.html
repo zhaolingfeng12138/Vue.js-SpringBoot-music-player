@@ -1,0 +1,272 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/H-ui.admin.css" />
+    <link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/default/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/style.css" />
+    <title>音乐播放器-添加歌手</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+</head>
+
+<body>
+    <article class="page-container">
+        <!--图片上传-->
+        <form class="form form-horizontal" id="uploadForm" enctype="multipart/form-data">
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>头像：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <input type="file" class="input-text radius" name="file">
+                </div>
+            </div>
+            <div class="row cl">
+                <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                    <input class="btn btn-success radius radius" type="submit" value="&nbsp;&nbsp;上传&nbsp;&nbsp;">
+                </div>
+            </div>
+        </form>
+        <br>
+        <div id="message" style="margin-left: 222px;"></div>
+        <form class="form form-horizontal" id="form-Songers-add">
+            <div class="row cl" style="display: none;">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>包含音乐：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <input type="text" class="input-text radius" value="" placeholder="" id="inmusichidden" name="inmusic">
+                </div>
+            </div>
+            <div class="row cl" style="display: none;">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>包含音乐：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <input type="text" class="input-text radius" value="" placeholder="" id="inalbumhidden" name="inalbum">
+                </div>
+            </div>
+            <div class="row cl" style="display: none;">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>头像：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <input type="text" class="input-text radius" value="" placeholder="" id="pic" name="pic">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名字：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <input type="text" class="input-text radius" value="" placeholder="" id="name" name="name">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>介绍：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <input type="text" class="input-text radius" value="" placeholder="" id="introduce" name="introduce">
+                </div>
+            </div>
+            <h5 style="color: brown; margin-left: 222px;">温馨提示:先选专辑在选音乐</h5>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>包含专辑：</label>
+                <div class="check-box" id="inalbum">
+
+                </div>
+            </div>
+            <div class="row cl">
+                <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                    <input class="btn btn-primary radius" value="&nbsp;&nbsp;保存所选专辑&nbsp;&nbsp;" onclick="save1()">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>包含音乐：</label>
+                <div class="check-box" id="inmusic">
+
+                </div>
+            </div>
+            <div class="row cl">
+                <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                    <input class="btn btn-primary radius" value="&nbsp;&nbsp;保存所选音乐&nbsp;&nbsp;" onclick="save2()">
+                </div>
+            </div>
+            </div>
+            <div class="row cl">
+                <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                    <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+                </div>
+            </div>
+        </form>
+    </article>
+
+    <!--_footer 作为公共模版分离出去-->
+    <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
+    <script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
+    <script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script>
+    <!--/_footer 作为公共模版分离出去-->
+
+    <!--请在下方写此页面业务相关的脚本-->
+    <script type="text/javascript" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+    <script type="text/javascript" src="lib/jquery.validation/1.14.0/validate-methods.js"></script>
+    <script type="text/javascript" src="lib/jquery.validation/1.14.0/messages_zh.js"></script>
+    <script type="text/javascript" src="static/config.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#uploadForm').submit(function (e) {
+                e.preventDefault(); // 阻止表单默认提交行为
+                var formData = new FormData(this); // 创建FormData对象
+                $.ajax({
+                    url: 'http://127.0.0.1:8080/uploadImg', // 文件上传的URL
+                    type: 'POST',
+                    data: formData,
+                    processData: false, // 禁止自动处理数据
+                    contentType: false, // 禁止设置请求头
+                    success: function (data) {
+                        if (data.code == 200) {
+                            if (data.data == "Fail!") {
+                                $('#message').text('文件上传失败！');
+                                $('#pic').val("");
+                            } else {
+                                $('#pic').val(data.data);
+                                $('#message').text('文件上传成功！' + data.data); // 显示成功消息
+                            }
+                        }
+                    },
+                    error: function (error) {
+                        // 显示失败消息
+                        $('#message').text('文件上传失败！');
+                        $('#pic').val("");
+                    }
+                });
+            });
+
+            //获取全部音乐
+            $.ajax({
+                type: "post",
+                url: server_address + "listMusicsAll",
+                data: {},
+                dataType: "json",
+                success: function (data) {
+                    if (data.code == 200) {
+                        $("#inmusic").removeAttr()
+                        var html = ""
+                        for (var i = 0; i < data.data.length; i++) {
+                            html += '<input type="checkbox" id="' + data.data[i].name + '">&nbsp;<label for="' + data.data[i].name + '">' + data.data[i].name + '</label><br>'
+                        }
+                        $("#inmusic").html(html)
+                    } else {
+                        layer.msg("网络错误！", { icon: 2, time: 1000 });
+                    }
+                },
+                error: function (daata) {
+                    layer.msg("网络错误！", { icon: 2, time: 1000 });
+                }
+            });
+
+            //获取全部专辑
+            $.ajax({
+                type: "post",
+                url: server_address + "listAlbumsAll",
+                data: {},
+                dataType: "json",
+                success: function (data) {
+                    if (data.code == 200) {
+                        $("#inalbum").removeAttr()
+                        var html = ""
+                        for (var i = 0; i < data.data.length; i++) {
+                            html += '<input type="checkbox" id="' + data.data[i].name + '">&nbsp;<label for="' + data.data[i].name + '">' + data.data[i].name + '</label><br>'
+                        }
+                        $("#inalbum").html(html)
+                    } else {
+                        layer.msg("网络错误！", { icon: 2, time: 1000 });
+                    }
+                },
+                error: function (daata) {
+                    layer.msg("网络错误！", { icon: 2, time: 1000 });
+                }
+            });
+
+            //获取全部音乐专辑渲染复选框
+            $('.skin-minimal input').iCheck({
+                checkboxClass: 'icheckbox-blue',
+                radioClass: 'iradio-blue',
+                increaseArea: '20%'
+            });
+
+            $("#form-Songers-add").validate({
+                rules: {
+                    name: {
+                        required: true,
+                    },
+                    introduce: {
+                        required: true,
+                    },
+                    pic: {
+                        required: true,
+                    },
+                    inmusic: {
+                        required: true,
+                    },
+                    inalbum: {
+                        required: true,
+                    },
+                },
+                onkeyup: false,
+                focusCleanup: true,
+                success: "valid",
+                submitHandler: function (form) {
+                    $(form).ajaxSubmit({
+                        type: 'post',
+                        url: server_address + "insertSongers",
+                        success: function (data) {
+                            if (data.code == 200) {
+                                layer.msg('添加成功！3秒后自动关闭！', { icon: 1, time: 1000 });
+                                var index = parent.layer.getFrameIndex(window.name);
+                                setTimeout(function () {
+                                    parent.layer.close(index);
+                                }, 3000);
+                            } else {
+                                layer.msg("添加失败！", { icon: 2, time: 1000 });
+                            }
+                        },
+                        error: function (XmlHttpRequest, textStatus, errorThrown) {
+                            layer.msg("网络错误！", { icon: 2, time: 1000 });
+                        }
+                    });
+                }
+            });
+        });
+
+        function save1() {
+            let selectedValues = "";
+            $('input[type="checkbox"]:checked').each(function () {
+                selectedValues = selectedValues + $(this).next('label').text() + ",";
+            });
+            $('#inalbumhidden').val(removeLastComma(selectedValues));
+            layer.msg('保存成功！', { icon: 1, time: 1000 });
+        };
+
+        function save2() {
+            let selectedValues = "";
+            $('input[type="checkbox"]:checked').each(function () {
+                selectedValues = selectedValues + $(this).next('label').text() + ",";
+            });
+            //排除到专辑
+            selectedValues = selectedValues.replaceAll($('#inalbumhidden').val()+",","")
+            $('#inmusichidden').val(removeLastComma(selectedValues));
+            layer.msg('保存成功！', { icon: 1, time: 1000 });
+        };
+
+        //去掉逗号
+        function removeLastComma(str) {
+            if (str.lastIndexOf(',') === str.length - 1) {
+                return str.substring(0, str.lastIndexOf(','));
+            }
+            return str;
+        }
+    </script>
+    <!--/请在上方写此页面业务相关的脚本-->
+</body>
+
+</html>

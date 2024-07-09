@@ -1,0 +1,232 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="renderer" content="webkit|ie-comp|ie-stand">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link href="static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+  <link href="static/h-ui.admin/css/H-ui.login.css" rel="stylesheet" type="text/css" />
+  <link href="static/h-ui.admin/css/style.css" rel="stylesheet" type="text/css" />
+  <link href="lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css" />
+  <title>后台登录 - 音乐播放器</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <style type="text/css">
+    #particles-js {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      background-position: 50% 50%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      margin-left: auto;
+      margin-right: auto;
+      background-image: url(/static/h-ui.admin/images/admin-login-bg.jpg);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="particles-js">
+    <div class="loginWraper">
+      <div id="loginform" class="loginBox">
+        <div class="form form-horizontal">
+          <div class="header">LOGIN</div>
+          <br>
+          <br>
+          <div class="input-wrapper">
+            <div class="row cl">
+              <div class="formControls border-wrapper">
+                <input id="account" name="" type="text" placeholder="账户" class="border-item size-L">
+              </div>
+            </div>
+            <div class="row cl">
+              <div class="formControls border-wrapper">
+                <input id="password" name="" type="password" placeholder="密码" class="border-item size-L">
+              </div>
+            </div>
+          </div>
+          <div class="row cl">
+            <div class="formControls col-xs-6 col-xs-offset-6">
+              <button id="sure_btn" type="submit"
+                class="btn btn-success radius size-L">&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;</button>
+              <button id="cale_btn" type="reset"
+                class="btn btn-default radius size-L">&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;</button>
+            </div>
+          </div>
+          <div class="icon-wrapper">
+            <i class="Hui-iconfont">&#xe694;</i>
+            <i class="Hui-iconfont">&#xe67b;</i>
+            <i class="Hui-iconfont">&#xe6da;</i>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
+    <script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
+    <!--粒子动画-->
+    <script type="text/javascript" src="static/h-ui.admin/js/particles.min.js"></script>
+    <script type="text/javascript" src="static/config.js"></script>
+    <script>
+      $(function () {
+        particlesJS('particles-js',
+          {
+            "particles": {
+              "number": {
+                "value": 40,
+                "density": {
+                  "enable": true,
+                  "value_area": 800
+                }
+              },
+              "color": {
+                "value": "#ffffff"
+              },
+              "shape": {
+                "type": "circle",
+                "stroke": {
+                  "width": 0,
+                  "color": "#000000"
+                },
+                "polygon": {
+                  "nb_sides": 5
+                },
+                "image": {
+                  "src": "img/github.svg",
+                  "width": 100,
+                  "height": 100
+                }
+              },
+              "opacity": {
+                "value": 0.7,
+                "random": false,
+                "anim": {
+                  "enable": false,
+                  "speed": 1,
+                  "opacity_min": 0.1,
+                  "sync": false
+                }
+              },
+              "size": {
+                "value": 3,
+                "random": true,
+                "anim": {
+                  "enable": false,
+                  "speed": 40,
+                  "size_min": 0.1,
+                  "sync": false
+                }
+              },
+              "line_linked": {
+                "enable": true,
+                "distance": 150,
+                "color": "#ffffff",
+                "opacity": 0.6,
+                "width": 1
+              },
+              "move": {
+                "enable": true,
+                "speed": 6,
+                "direction": "none",
+                "random": false,
+                "straight": false,
+                "out_mode": "out",
+                "bounce": false,
+                "attract": {
+                  "enable": false,
+                  "rotateX": 600,
+                  "rotateY": 1200
+                }
+              }
+            },
+            "interactivity": {
+              "detect_on": "canvas",
+              "events": {
+                "onhover": {
+                  "enable": true,
+                  "mode": "grab"
+                },
+                "onclick": {
+                  "enable": true,
+                  "mode": "push"
+                },
+                "resize": true
+              },
+              "modes": {
+                "grab": {
+                  "distance": 200,
+                  "line_linked": {
+                    "opacity": 1
+                  }
+                },
+                "bubble": {
+                  "distance": 400,
+                  "size": 40,
+                  "duration": 2,
+                  "opacity": 8,
+                  "speed": 3
+                },
+                "repulse": {
+                  "distance": 200,
+                  "duration": 0.4
+                },
+                "push": {
+                  "particles_nb": 4
+                },
+                "remove": {
+                  "particles_nb": 2
+                }
+              }
+            },
+            "retina_detect": false
+          }
+
+        );
+        $("#sure_btn").click(function () {
+          if ($("#account").val().length != 0 && $("#account").val().length != 0) {
+            $.ajax({
+              type: "post",
+              url: server_address + "loginAdmins",
+              data: {
+                account: $("#account").val(),
+                password: $("#password").val()
+              },
+              dataType: "json",
+              success: function (data) {
+                if (data.code == 200) {
+                  layer.msg("登录成功！3秒后自动跳转！", { icon: 1, time: 1000 });
+                  setTimeout(function () {
+                    window.localStorage.setItem("adminid", data.data[0].id);
+                    window.localStorage.setItem("adminaccount", data.data[0].account);
+                    window.location.href = "main.html";
+                  }, 3000);
+                } else {
+                  layer.msg("登录失败！", { icon: 2, time: 1000 });
+                }
+              },
+              error: function (daata) {
+                layer.msg("网络错误！", { icon: 2, time: 1000 });
+              }
+            });
+          } else {
+            layer.msg("账号或密码不能为空！", { icon: 2, time: 1000 });
+          }
+
+        });
+        $("#cale_btn").click(function () {
+          $("#account").val("");
+          $("#password").val("");
+        });
+      })
+    </script>
+
+</body>
+
+</html>

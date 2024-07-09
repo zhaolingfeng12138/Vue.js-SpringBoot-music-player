@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leth.playmanageserver.Daos.SongersDao">
+
+    <insert id="insertSongers" parameterType="com.leth.playmanageserver.Pojos.Songers" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into Songers(name, introduce, pic, inalbum, inmusic) values (#{name}, #{introduce}, #{pic}, #{inalbum}, #{inmusic})
+    </insert>
+
+    <delete id="deleteSongers">
+        delete from Songers where id=#{id}
+    </delete>
+
+    <update id="updateSongers" parameterType="com.leth.playmanageserver.Pojos.Songers" keyProperty="id" useGeneratedKeys="true">
+        update Songers
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="introduce != null">introduce = #{introduce},</if>
+            <if test="pic != null">pic = #{pic},</if>
+            <if test="inalbum != null">inalbum = #{inalbum},</if>
+            <if test="inmusic != null">inmusic = #{inmusic}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="listSongersAll" resultType="com.leth.playmanageserver.Pojos.Songers">
+        select * from Songers
+    </select>
+
+    <select id="searchSongers" resultType="com.leth.playmanageserver.Pojos.Songers">
+        select * from Songers where convert(name using binary) like '%${name}%'
+    </select>
+
+    <select id="searchSongersOne" resultType="com.leth.playmanageserver.Pojos.Songers">
+        select * from Songers where id=#{id}
+    </select>
+
+</mapper>

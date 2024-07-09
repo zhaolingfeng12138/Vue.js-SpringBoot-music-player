@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leth.playmanageserver.Daos.UsersDao">
+
+    <insert id="insertUsers" parameterType="com.leth.playmanageserver.Pojos.Users" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into Users(account, password, name, phone, playlist, pic, status) values (#{account}, #{password}, #{name}, #{phone}, #{playlist}, #{pic}, 0)
+    </insert>
+
+    <delete id="deleteUsers">
+        delete from Users where id=#{id}
+    </delete>
+
+    <update id="updateUsers" parameterType="com.leth.playmanageserver.Pojos.Users" keyProperty="id" useGeneratedKeys="true">
+        update Users
+        <set>
+            <if test="account != null">account = #{account},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="playlist != null">playlist = #{playlist},</if>
+            <if test="pic != null">pic = #{pic},</if>
+            <if test="status != null">status = #{status}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <update id="updateUsersPassword" parameterType="com.leth.playmanageserver.Pojos.Users" keyProperty="id" useGeneratedKeys="true">
+        update Users
+        <set>
+            <if test="password != ''">password = #{password}</if>
+        </set>
+        where phone=#{phone}
+    </update>
+
+    <select id="listUsersAll" resultType="com.leth.playmanageserver.Pojos.Users">
+        select * from Users
+    </select>
+
+    <select id="loginUsers" resultType="com.leth.playmanageserver.Pojos.Users">
+        select * from Users where account=#{account} and password=#{password}
+    </select>
+
+    <select id="searchUsers" resultType="com.leth.playmanageserver.Pojos.Users">
+        select * from Users where account like '%${name}%' or name  like '%${name}%' or phone  like '%${name}%'
+    </select>
+
+    <select id="searchUsersOne" resultType="com.leth.playmanageserver.Pojos.Users">
+        select * from Users where id=#{id}
+    </select>
+
+</mapper>

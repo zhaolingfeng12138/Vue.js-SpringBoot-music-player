@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leth.playmanageserver.Daos.AlbumsDao">
+
+    <insert id="insertAlbums" parameterType="com.leth.playmanageserver.Pojos.Albums" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into Albums(name, introduce, bysonger, pic, time, inmusic) values (#{name}, #{introduce}, #{bysonger}, #{pic}, #{time}, #{inmusic})
+    </insert>
+
+    <delete id="deleteAlbums">
+        delete from Albums where id=#{id}
+    </delete>
+
+    <update id="updateAlbums" parameterType="com.leth.playmanageserver.Pojos.Albums" keyProperty="id" useGeneratedKeys="true">
+        update Albums
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="introduce != null">introduce = #{introduce},</if>
+            <if test="bysonger != null">bysonger = #{bysonger},</if>
+            <if test="pic != null">pic = #{pic},</if>
+            <if test="time != null">time = #{time},</if>
+            <if test="inmusic != null">inmusic = #{inmusic}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="listAlbumsAll" resultType="com.leth.playmanageserver.Pojos.Albums">
+        select * from Albums
+    </select>
+
+    <select id="searchAlbums" resultType="com.leth.playmanageserver.Pojos.Albums">
+        select * from Albums where convert(name using binary) like '%${name}%' or convert(bysonger using binary) like '%${name}%'
+    </select>
+
+    <select id="searchAlbumsOne" resultType="com.leth.playmanageserver.Pojos.Albums">
+        select * from Albums where id=#{id}
+    </select>
+
+</mapper>

@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    username: root
+    password: ""
+    url: jdbc:mysql://127.0.0.1:3306/playmanage?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+mybatis:
+  type-aliases-package: com.leth.playmanageserver.Pojos
+  mapper-locations: classpath:/Mappers/*.xml
+
+
